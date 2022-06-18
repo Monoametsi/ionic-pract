@@ -5,24 +5,40 @@
                 <ion-card>
                     <ion-card-content>
                         <ion-card-header color="primary rounded">
-                            <ion-card-title class="title">
-                                Expenses
-                            </ion-card-title>
+                            <ion-item class="ion-item" color="primary" lines="none">
+                                <ion-card-title class="title">
+                                    Expenses
+                                </ion-card-title>
+                                <ion-button role="buttons" slot="end" size="large" title="Add an expense">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                </ion-button>
+                            </ion-item>
                         </ion-card-header>
-                        <ion-item class="ion-margin-top">
-                            <ion-label position="floating">
-                                Snacks
-                            </ion-label>
-                            <ion-input type="tel">
-                            </ion-input>
+                        <ion-item>
+                            <ion-item class="ion-margin-top ion-padding-bottom w-100">
+                                <ion-label position="floating">
+                                    Snacks
+                                </ion-label>
+                                <ion-input type="tel">
+                                </ion-input>
+                            </ion-item>
+                            <ion-list slot="end">
+                                <ion-button size="default" color="tertiary" title="Update expense">
+                                    <ion-icon name="pencil-outline"></ion-icon>
+                                </ion-button>
+                                <ion-button color="danger" size="default" title="Delete expense">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </ion-button>
+                            </ion-list>
                         </ion-item>
-                        <ion-item class="ion-margin-top">
+                        
+                        <!-- <ion-item class="ion-margin-top">
                             <ion-label position="floating">
                                 Transport
                             </ion-label>
                             <ion-input type="tel">
                             </ion-input>
-                        </ion-item>
+                        </ion-item> -->
                     </ion-card-content>
                 </ion-card>
             </ion-col>
