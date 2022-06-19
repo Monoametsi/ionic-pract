@@ -34,9 +34,3 @@
 body{
     font-family: "Poppins",sans-serif;
 }
-
-@supports (margin-inline-start: 0) or (-webkit-margin-start: 0) or (-webkit-margin-start: 0) {
-    .item-inner{
-        padding-inline-end: 0 !important;
-    }
-}

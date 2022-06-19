@@ -5,16 +5,18 @@
                 <ion-card>
                     <ion-card-content>
                         <ion-card-header color="primary rounded">
-                            <ion-item color="primary" lines="none">
-                                <ion-card-title class="title">
+                            <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                                <ion-card-title class="title p-2">
                                     Monthly Expenses
                                 </ion-card-title>
-                                <ion-button role="buttons" slot="end" size="large" title="Add an expense">
-                                    <ion-icon name="add-outline"></ion-icon>
+                                
+                                <ion-button class="pb-2" role="buttons" slot="end" size="default" title="Add an expense">
+                                    <ion-icon name="add-outline" slot="start"></ion-icon>
+                                    Add Expense
                                 </ion-button>
-                            </ion-item>
+                            </div>
                         </ion-card-header>
-                        <ion-item>
+                        <div class="d-flex flex-wrap justify-content-between">
                             <ion-item class="ion-margin-top ion-item">
                                 <ion-label>
                                     Snacks
@@ -35,7 +37,7 @@
                                     </ion-button>
                                 </ion-item>
                             </ion-list>
-                        </ion-item>
+                        </div>
                         
                         <!-- <ion-item class="ion-margin-top">
                             <ion-label position="floating">
