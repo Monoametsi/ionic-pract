@@ -6,6 +6,16 @@
     font-family: Montserrat, sans-serif;
 }
 
-// .ion-item{
-//     --inner-box-shadow: 0;
-// }
+.ion-item{
+    --border-width: 0;
+    --border-color: #fff;
+}
+
+ion-list{
+    padding-bottom: 0;
+}
+
+.l{
+    width: 100%;
+    max-width: 120px;
+}
