@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
+  
+  isModalOpen: boolean;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  openModal(){
+    this.isModalOpen = true;
   }
 
 }

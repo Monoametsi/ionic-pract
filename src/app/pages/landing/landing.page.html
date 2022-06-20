@@ -1,54 +1,176 @@
 <ion-content fullscreen>
     <ion-grid>
         <ion-row class="ion-justify-content-center">
-            <ion-col size-md="6">
+            <ion-col size="12" size-md="6">
                 <ion-card>
-                    <ion-card-content>
-                        <ion-card-header color="primary rounded">
-                            <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
-                                <ion-card-title class="title p-2">
-                                    Monthly Expenses
-                                </ion-card-title>
-                                
-                                <ion-button class="pb-2" role="buttons" slot="end" size="default" title="Add an expense">
-                                    <ion-icon name="add-outline" slot="start"></ion-icon>
-                                    Add Expense
-                                </ion-button>
-                            </div>
-                        </ion-card-header>
-                        <div class="d-flex flex-wrap justify-content-between">
-                            <ion-item class="ion-margin-top ion-item">
-                                <ion-label>
-                                    Snacks
-                                </ion-label>
-                                <!-- <ion-label position="floating">
-                                    Snacks
-                                </ion-label> -->
-                                <!-- <ion-input type="tel">
-                                </ion-input> -->
-                            </ion-item>
-                            <ion-list slot="end">
-                                <ion-item class="ion-item">
-                                    <ion-item>
-                                        <ion-input type="tel" value="0" class="l"></ion-input>
-                                    </ion-item>
-                                    <ion-button color="danger" size="default" title="Delete expense">
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </ion-button>
-                                </ion-item>
-                            </ion-list>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Monthly Expenses
+                            </ion-card-title>
+                            
+                            <ion-button (click)="openModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
+                                <ion-icon name="add-outline" slot="start"></ion-icon>
+                                Add Expense
+                            </ion-button>
                         </div>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <div class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
+                                <ion-item class="ion-margin-top ion-item">
+                                    <ion-label class="fs-5">
+                                        Snacks
+                                    </ion-label>
+                                </ion-item>
+                                <ion-list slot="end">
+                                    <ion-item class="ion-item">
+                                        <!-- <ion-item> -->
+                                            <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
+                                            <input type="tel" value="0" class="form-control ms-1 l">
+                                        <!-- </ion-item> -->
+                                        <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </ion-button>
+                                    </ion-item>
+                                </ion-list>
+                            </div>
+                        </ion-list>
                         
-                        <!-- <ion-item class="ion-margin-top">
-                            <ion-label position="floating">
-                                Transport
-                            </ion-label>
-                            <ion-input type="tel">
-                            </ion-input>
-                        </ion-item> -->
                     </ion-card-content>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-md-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Total Monthly Expenses
+                            </ion-card-title>
+                            
+                            <input type="tel" value="0" class="form-control ms-1 l">
+                        </div>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+            <ion-col size="12" size-md="6">
+                <ion-card>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Monthly Income
+                            </ion-card-title>
+                            
+                            <ion-button (click)="openModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
+                                <ion-icon name="add-outline" slot="start"></ion-icon>
+                                Add Income
+                            </ion-button>
+                        </div>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <div class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
+                                <ion-item class="ion-margin-top ion-item">
+                                    <ion-label class="fs-5">
+                                        Salary
+                                    </ion-label>
+                                </ion-item>
+                                <ion-list slot="end">
+                                    <ion-item class="ion-item">
+                                        <!-- <ion-item> -->
+                                            <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
+                                            <input type="tel" value="0" class="form-control ms-1 l">
+                                        <!-- </ion-item> -->
+                                        <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </ion-button>
+                                    </ion-item>
+                                </ion-list>
+                            </div>
+                        </ion-list>
+                        
+                    </ion-card-content>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-md-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Total Monthly Income
+                            </ion-card-title>
+                            
+                            <input type="tel" value="0" class="form-control ms-1 l">
+                        </div>
+                    </ion-card-header>
                 </ion-card>
             </ion-col>
         </ion-row>
+
+        <!-- <ion-row class="ion-justify-content-center">
+            <ion-col size-md="6">
+                <ion-card>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Monthly Income
+                            </ion-card-title>
+                            
+                            <ion-button class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
+                                <ion-icon name="add-outline" slot="start"></ion-icon>
+                                Add Income
+                            </ion-button>
+                        </div>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-list>
+                            <div class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
+                                <ion-item class="ion-margin-top ion-item">
+                                    <ion-label class="fs-5">
+                                        Salary
+                                    </ion-label>
+                                </ion-item>
+                                <ion-list slot="end">
+                                    <ion-item class="ion-item">
+                                        <ion-item> -->
+                                            <!-- <ion-input type="tel" value="0" class="l"></ion-input>
+                                            <input type="tel" value="0" class="form-control ms-1 l">
+                                        </ion-item>
+                                        <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </ion-button>
+                                    </ion-item>
+                                </ion-list>
+                            </div>
+                        </ion-list>
+                        
+                    </ion-card-content>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Total Monthly Expenses
+                            </ion-card-title>
+                            
+                            <input type="tel" value="0" class="form-control ms-1 l">
+                        </div>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+        </ion-row> -->
+
+        <ion-row class="ion-justify-content-center">
+            <ion-col size-md="5">
+                <ion-card>
+                    <ion-card-header color="primary">
+                        <div class="d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap">
+                            <ion-card-title class="title p-2 text-center fw-bold">
+                                Total Monthly Net
+                            </ion-card-title>
+                            
+                            <input type="tel" value="0" class="form-control ms-1 l">
+                        </div>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
     </ion-grid>
+
+    <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+            <app-test></app-test>
+        </ng-template>
+    </ion-modal>
 </ion-content>
