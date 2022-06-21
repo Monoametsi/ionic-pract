@@ -9,7 +9,7 @@
                                 Monthly Expenses
                             </ion-card-title>
                             
-                            <ion-button id="trigger-button" (click)="openModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
+                            <ion-button (click)="presentModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
                                 <ion-icon name="add-outline" slot="start"></ion-icon>
                                 Add Expense
                             </ion-button>
@@ -57,7 +57,7 @@
                                 Monthly Income
                             </ion-card-title>
                             
-                            <ion-button id="trigger-button" (click)="openModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
+                            <ion-button (click)="presentModal()" id="trigg-button" (click)="openModal()" class="pb-2" color="light" role="buttons" slot="end" size="default" title="Add an expense">
                                 <ion-icon name="add-outline" slot="start"></ion-icon>
                                 Add Income
                             </ion-button>
@@ -167,10 +167,5 @@
         </ion-row>
 
     </ion-grid>
-
-        <ion-modal trigger="trigger-button">
-            <ng-template>
-                <ion-content>Modal Content</ion-content>
-            </ng-template>
-        </ion-modal>
+    
 </ion-content>
