@@ -11,10 +11,13 @@ export class ModalPageComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.check()
+  }
 
   check(){
     if(this.firstName === 'Douglas'){
+      console.log(true)
       return true
     }
   }

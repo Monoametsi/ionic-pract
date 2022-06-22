@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
 
@@ -8,8 +8,8 @@ import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.com
   styleUrls: ['./landing.page.scss'],
 })
 
-export class LandingPage implements OnInit {
-  
+export class LandingPage implements OnInit, AfterViewInit {
+  @ViewChild('income') income;
   isModalOpen: boolean;
   modal: HTMLElement;
 
@@ -17,8 +17,12 @@ export class LandingPage implements OnInit {
 
   ngOnInit() {
   }
+  
+  ngAfterViewInit(): void {}
 
-  async presentModal() {
+  async presentModal(event) {
+    // this.type.el.style.color = 'dark';
+    console.log(event.el);
     const modal = await this.modalController.create({
       component: ModalPageComponent,
       cssClass: 'my-custom-class',
@@ -26,10 +30,11 @@ export class LandingPage implements OnInit {
         'firstName': 'Douglas'
       }
     });
+    
     return await modal.present();
   }
 
-  openModal(){
+  openModal(isModalOpen){
     this.isModalOpen = true;
   }
 
