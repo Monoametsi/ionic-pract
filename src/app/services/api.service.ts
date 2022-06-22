@@ -11,8 +11,8 @@ export class ApiService {
   constructor() { }
 
   addFinanceType(data: budgetItem){
-    
-    const setfinanceType = localStorage.set('','');
+    let budgetItems = [data];
+    const setfinanceType = localStorage.set('budget_items',JSON.stringify(budgetItems));
   }
 
   deleteFinanceType(id: number){
