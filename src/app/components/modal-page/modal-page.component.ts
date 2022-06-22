@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-page',
@@ -7,19 +8,24 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ModalPageComponent implements OnInit {
 
-  @Input() firstName: string;
+  @Input() modalTitle: string;
 
-  constructor() { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
-    this.check()
   }
 
-  check(){
-    if(this.firstName === 'Douglas'){
-      console.log(true)
-      return true
-    }
+  addFinanceType(){
+    const expense = this.modalTitle.search(/expense/i);
+    const income = this.modalTitle.search(/income/i);
+    
+    
+  }
+
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
 
 }

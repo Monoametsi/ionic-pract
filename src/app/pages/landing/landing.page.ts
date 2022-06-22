@@ -8,8 +8,8 @@ import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.com
   styleUrls: ['./landing.page.scss'],
 })
 
-export class LandingPage implements OnInit, AfterViewInit {
-  @ViewChild('income') income;
+export class LandingPage implements OnInit/*, AfterViewInit */{
+  // @ViewChild('income') income;
   isModalOpen: boolean;
   modal: HTMLElement;
 
@@ -18,30 +18,25 @@ export class LandingPage implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   
-  ngAfterViewInit(): void {}
+  // ngAfterViewInit(): void {}
 
-  async presentModal(event) {
-    // this.type.el.style.color = 'dark';
-    console.log(event.el);
+  async presentModal(event: { el: { id: string; }; }) {
+    let modalTitle: string;
+    
+    if(event.el.id === 'expense'){
+      modalTitle = 'Add Expense'
+    }else{
+      modalTitle = 'Add Income'
+    }
+    
     const modal = await this.modalController.create({
       component: ModalPageComponent,
-      cssClass: 'my-custom-class',
       componentProps: {
-        'firstName': 'Douglas'
+        'modalTitle': modalTitle
       }
     });
     
     return await modal.present();
-  }
-
-  openModal(isModalOpen){
-    this.isModalOpen = true;
-  }
-
-  dismiss() {
-    this.modalController.dismiss({
-      'dismissed': true
-    });
   }
 
 }

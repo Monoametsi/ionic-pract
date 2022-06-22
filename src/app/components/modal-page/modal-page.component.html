@@ -1,3 +1,38 @@
-<p>
-  {{ firstName }}
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center fs-3">
+      {{ modalTitle }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <!-- <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+  </ion-grid> -->
+
+  <form class="ion-margin-top">
+    <ion-item class="ion-margin-bottom">
+      <ion-label position="floating">Description</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Estimated Budget</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <div class="ion-padding ion-float-right">
+      <ion-button size="default" (click)="dismiss()">Cancel</ion-button>
+      <ion-button size="default ion-margin-start" (click)="addFinanceType()">Save</ion-button>
+    </div>
+    
+  </form>
+</ion-content>
