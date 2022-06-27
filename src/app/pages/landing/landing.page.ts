@@ -18,13 +18,13 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   constructor(public modalController: ModalController) { }
 
   ngOnInit() {
-    this.getBudgetItems()
+    this.getBudgetItems();
   }
   
   // ngAfterViewInit(): void {}
 
   getBudgetItems(){
-    
+
     if(localStorage.getItem('budget_items')){
       this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
 
@@ -34,14 +34,23 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     }
   }
 
+  removeBudgetItems(id: number){
+    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
+
+    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+      return budgetItem.id === id
+    })
+
+    getBudgetItems.splice(findItemPos, 1)
+    
+    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
+    window.dispatchEvent( new Event('storage') );
+  }
+
   async presentModal(event: { el: { id: string; }; }) {
     let modalTitle: string;
-    
-    if(event.el.id === 'expense'){
-      modalTitle = 'Add Expense'
-    }else{
-      modalTitle = 'Add Income'
-    }
+
+    modalTitle = (event.el.id === 'expense')? 'Add Expense' : 'Add Income'
     
     const modal = await this.modalController.create({
       component: ModalPageComponent,

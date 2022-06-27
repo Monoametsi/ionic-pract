@@ -29,7 +29,7 @@
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
                                             <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
-                                        <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
+                                        <ion-button (click)="removeBudgetItems(budgetItem.id)" color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>
                                         </ion-button>
                                     </ion-item>
@@ -77,8 +77,8 @@
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
                                             <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
-                                        <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
-                                            <ion-icon name="trash-outline"></ion-icon>
+                                        <ion-button (click)="removeBudgetItems(budgetItem.id)"color="danger" size="default" title="Delete expense" class="ion-margin-start">
+                                            <ion-icon name="trash-outline" (click)="removeBudgetItems(budgetItem.id)"></ion-icon>
                                         </ion-button>
                                     </ion-item>
                                 </ion-list>
