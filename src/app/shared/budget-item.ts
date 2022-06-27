@@ -1,5 +1,6 @@
 export interface budgetItem {
     id: number,
+    type: string,
     description: string,
-    budgetAmount: number
+    amount: number
 }

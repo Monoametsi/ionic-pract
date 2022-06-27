@@ -9,13 +9,5 @@ import { budgetItem } from '../shared/budget-item';
 export class ApiService {
 
   constructor() { }
-
-  addFinanceType(data: budgetItem){
-    let budgetItems = [data];
-    const setfinanceType = localStorage.set('budget_items',JSON.stringify(budgetItems));
-  }
-
-  deleteFinanceType(id: number){
-
-  }
+  
 }

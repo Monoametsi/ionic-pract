@@ -16,18 +16,18 @@
                         </div>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-list>
-                            <div class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
+                        <ion-list *ngFor="let budgetItem of budgetItems">
+                            <div *ngIf="budgetItem.type === 'expense'" class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
                                 <ion-item class="ion-margin-top ion-item">
                                     <ion-label class="fs-5">
-                                        Snacks
+                                        {{ budgetItem.description }}
                                     </ion-label>
                                 </ion-item>
                                 <ion-list slot="end">
                                     <ion-item class="ion-item">
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" value="0" class="form-control ms-1 l">
+                                            <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>
@@ -64,18 +64,18 @@
                         </div>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-list>
-                            <div class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
+                        <ion-list *ngFor="let budgetItem of budgetItems">
+                            <div *ngIf="budgetItem.type === 'income'" class="d-flex flex-wrap justify-content-center align-items-center justify-content-md-between">
                                 <ion-item class="ion-margin-top ion-item">
                                     <ion-label class="fs-5">
-                                        Salary
+                                        {{ budgetItem.description }}
                                     </ion-label>
                                 </ion-item>
                                 <ion-list slot="end">
                                     <ion-item class="ion-item">
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" value="0" class="form-control ms-1 l">
+                                            <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>

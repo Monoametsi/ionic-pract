@@ -18,20 +18,20 @@
       </ion-row>
   </ion-grid> -->
 
-  <form class="ion-margin-top">
+  <form class="ion-margin-top" [formGroup]="addBudgetForm">
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Description</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="text" formControlName="description"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Estimated Budget</ion-label>
-      <ion-input></ion-input>
+      <ion-input type="tel" formControlName="budget"></ion-input>
     </ion-item>
 
     <div class="ion-padding ion-float-right">
       <ion-button size="default" (click)="dismiss()">Cancel</ion-button>
-      <ion-button size="default ion-margin-start" (click)="addFinanceType()">Save</ion-button>
+      <ion-button size="default ion-margin-start" (click)="addBudget()">Save</ion-button>
     </div>
     
   </form>
