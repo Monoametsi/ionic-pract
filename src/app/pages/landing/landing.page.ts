@@ -34,23 +34,32 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   // ngAfterViewInit(): void {}
 
   setTotalVals(){
-    const income  =  document.getElementsByClassName('income') as HTMLCollectionOf<HTMLInputElement>;
+    const income: HTMLCollectionOf<Element> =  document.getElementsByClassName('income') as HTMLCollectionOf<HTMLInputElement>;
     const expense: HTMLCollectionOf<Element> = document.getElementsByClassName('expense') as HTMLCollectionOf<HTMLInputElement>;
 
     const totalSumCalc = (elemArr: HTMLCollectionOf<Element>) => {
-      console.log(elemArr.length);
+      console.log(elemArr);
       let totalSum: number = 0;
       for(let i = 0; i < elemArr.length; i++){
         const value = Number((<HTMLInputElement> elemArr[i]).value);
-        console.log('elemArr[i]');
         totalSum += value;
       }
       
       return totalSum;
     }
-    
-    this.budgetCalcForm.value.total_income = totalSumCalc(income);
-    // totalSumCalc(expense);
+
+    const returnTotals = () => {
+      this.budgetCalcForm.controls['total_income'].setValue(totalSumCalc(income));
+      this.budgetCalcForm.controls['total_expense'].setValue(totalSumCalc(expense));
+      const totalBudget = Number(this.budgetCalcForm.value.total_income) + Number(this.budgetCalcForm.value.total_expense);
+      this.budgetCalcForm.controls['total_budget'].setValue(totalBudget);
+    }
+
+    returnTotals();
+
+    window.onload = () => {
+      returnTotals();
+    }
     
   }
 
@@ -58,10 +67,10 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
     if(localStorage.getItem('budget_items')){
       this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      this.setTotalVals();
+      this.setTotalVals()
       window.addEventListener('storage', (e) => {
         this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-        this.setTotalVals();
+          this.setTotalVals()
         return;
       })
     }
@@ -78,6 +87,10 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     
     localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
     window.dispatchEvent( new Event('storage') );
+    window.addEventListener('storage', (e) => {
+        this.setTotalVals();
+      return;
+    })
   }
 
   async presentModal(event: { el: { id: string; }; }) {
