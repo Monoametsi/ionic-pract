@@ -27,7 +27,8 @@
                                     <ion-item class="ion-item">
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" formControlName="expense" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
+                                            <!-- <input type="tel" formControlName="expense" value="{{ budgetItem.amount }}" class="form-control ms-1 l"> -->
+                                            <input type="tel" value="{{ budgetItem.amount }}" class="expense form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)" color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>
@@ -72,10 +73,8 @@
                                 </ion-item>
                                 <ion-list slot="end">
                                     <ion-item class="ion-item">
-                                        <!-- <ion-item> -->
-                                            <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" formControlName="income" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
-                                        <!-- </ion-item> -->
+                                            <!-- <input type="tel" formControlName="income" value="{{ budgetItem.amount }}" class="form-control ms-1 l"> -->
+                                            <input type="tel" value="{{ budgetItem.amount }}" class="income form-control ms-1 l">
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)"color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline" (click)="removeBudgetItems(budgetItem.id)"></ion-icon>
                                         </ion-button>

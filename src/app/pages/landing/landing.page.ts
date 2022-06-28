@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
 import { ModalController } from '@ionic/angular';
+import { DOCUMENT } from '@angular/common'; 
 
 @Component({
   selector: 'app-landing',
@@ -17,29 +18,51 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   budgetItems: budgetItem[] = [];
   budgetCalcForm: FormGroup;
 
-  constructor(public modalController: ModalController, private formBuilder: FormBuilder) { }
+  constructor(@Inject(DOCUMENT) document: Document, public modalController: ModalController, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.budgetCalcForm = this.formBuilder.group({
-      expense: new FormControl(''),
-      income: new FormControl(''),
-      total_expense: new FormControl(''),
-      total_income: new FormControl(''),
-      total_budget: new FormControl('')
+      total_expense: new FormControl('0'),
+      total_income: new FormControl('0'),
+      total_budget: new FormControl('0')
     })
 
     this.getBudgetItems();
+
   }
   
   // ngAfterViewInit(): void {}
+
+  setTotalVals(){
+    const income  =  document.getElementsByClassName('income') as HTMLCollectionOf<HTMLInputElement>;
+    const expense: HTMLCollectionOf<Element> = document.getElementsByClassName('expense') as HTMLCollectionOf<HTMLInputElement>;
+
+    const totalSumCalc = (elemArr: HTMLCollectionOf<Element>) => {
+      console.log(elemArr.length);
+      let totalSum: number = 0;
+      for(let i = 0; i < elemArr.length; i++){
+        const value = Number((<HTMLInputElement> elemArr[i]).value);
+        console.log('elemArr[i]');
+        totalSum += value;
+      }
+      
+      return totalSum;
+    }
+    
+    this.budgetCalcForm.value.total_income = totalSumCalc(income);
+    // totalSumCalc(expense);
+    
+  }
 
   getBudgetItems(){
 
     if(localStorage.getItem('budget_items')){
       this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-
+      this.setTotalVals();
       window.addEventListener('storage', (e) => {
-        return this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+        this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+        this.setTotalVals();
+        return;
       })
     }
   }
