@@ -1,5 +1,5 @@
 <ion-content fullscreen>
-    <ion-grid>
+    <ion-grid [formGroup]="budgetCalcForm">
         <ion-row class="ion-justify-content-center">
             <ion-col size="12" size-md="6">
                 <ion-card>
@@ -27,7 +27,7 @@
                                     <ion-item class="ion-item">
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
+                                            <input type="tel" formControlName="expense" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)" color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>
@@ -36,7 +36,6 @@
                                 </ion-list>
                             </div>
                         </ion-list>
-                        
                     </ion-card-content>
                     <ion-card-header color="primary">
                         <div class="d-flex justify-content-center justify-content-md-between align-items-center flex-wrap">
@@ -44,7 +43,7 @@
                                 Total Monthly Expenses
                             </ion-card-title>
                             
-                            <input type="tel" value="0" class="form-control ms-1 l">
+                            <input type="tel"  formControlName="total_expense" value="0" class="form-control ms-1 l">
                         </div>
                     </ion-card-header>
                 </ion-card>
@@ -75,7 +74,7 @@
                                     <ion-item class="ion-item">
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
-                                            <input type="tel" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
+                                            <input type="tel" formControlName="income" value="{{ budgetItem.amount }}" class="form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)"color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline" (click)="removeBudgetItems(budgetItem.id)"></ion-icon>
@@ -92,7 +91,7 @@
                                 Total Monthly Income
                             </ion-card-title>
                             
-                            <input type="tel" value="0" class="form-control ms-1 l">
+                            <input formControlName="total_income" type="tel" value="0" class="form-control ms-1 l">
                         </div>
                     </ion-card-header>
                 </ion-card>
@@ -159,7 +158,7 @@
                                 Total Monthly Net
                             </ion-card-title>
                             
-                            <input type="tel" value="0" class="form-control ms-1 l">
+                            <input formControlName="total_budget" type="tel" value="0" class="form-control ms-1 l">
                         </div>
                     </ion-card-header>
                 </ion-card>

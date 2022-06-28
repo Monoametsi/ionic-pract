@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-landing',
@@ -14,10 +15,19 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   isModalOpen: boolean;
   modal: HTMLElement;
   budgetItems: budgetItem[] = [];
+  budgetCalcForm: FormGroup;
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.budgetCalcForm = this.formBuilder.group({
+      expense: new FormControl(''),
+      income: new FormControl(''),
+      total_expense: new FormControl(''),
+      total_income: new FormControl(''),
+      total_budget: new FormControl('')
+    })
+
     this.getBudgetItems();
   }
   
