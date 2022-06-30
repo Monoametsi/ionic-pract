@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
 import { ModalController } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common'; 
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-landing',
@@ -38,7 +39,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     const expense: HTMLCollectionOf<Element> = document.getElementsByClassName('expense') as HTMLCollectionOf<HTMLInputElement>;
 
     const totalSumCalc = (elemArr: HTMLCollectionOf<Element>) => {
-      console.log(elemArr);
+      //console.log(elemArr);
       let totalSum: number = 0;
       for(let i = 0; i < elemArr.length; i++){
         const value = Number((<HTMLInputElement> elemArr[i]).value);
@@ -72,7 +73,6 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   }
 
   getBudgetItems(){
-
     if(localStorage.getItem('budget_items')){
       this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
       this.setTotalValsTimer()
@@ -94,29 +94,39 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     getBudgetItems[findItemPos].amount = Number(event.srcElement.value);
     
     localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
-    window.dispatchEvent( new Event('storage') );
-    window.addEventListener('storage', (e) => {
-        this.setTotalVals();
-      return;
-    })
+    this.setTotalVals();
+    // window.dispatchEvent( new Event('storage') );
+    // window.addEventListener('storage', (e) => {
+    //   this.setTotalValsTimer()
+    //   console.log('gygygyg')
+    //   return;
+    // })
 
   }
 
   removeBudgetItems(id: number){
-    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    const x = new Observable((observer) => {
+      const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
 
-    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
-      return budgetItem.id === id
+      const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+        return budgetItem.id === id
+      })
+
+      getBudgetItems.splice(findItemPos, 1)
+      
+      localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
+      this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+      observer.next(true);
     })
 
-    getBudgetItems.splice(findItemPos, 1)
+    x.subscribe(()=>{ this.setTotalVals() })
     
-    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
-    window.dispatchEvent( new Event('storage') );
-    window.addEventListener('storage', (e) => {
-      this.setTotalValsTimer();
-      return;
-    })
+    // this.setTotalValsTimer();
+    // window.dispatchEvent( new Event('storage') );
+    // window.addEventListener('storage', (e) => {
+    //   this.setTotalValsTimer();
+    //   return;
+    // })
   }
 
   async presentModal(event: { el: { id: string; }; }) {

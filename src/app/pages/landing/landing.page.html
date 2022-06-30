@@ -28,7 +28,7 @@
                                         <!-- <ion-item> -->
                                             <!-- <ion-input type="tel" value="0" class="l"></ion-input> -->
                                             <!-- <input type="tel" formControlName="expense" value="{{ budgetItem.amount }}" class="form-control ms-1 l"> -->
-                                            <input type="tel" (input)="setTotalVals()" value="{{ budgetItem.amount }}" class="expense form-control ms-1 l">
+                                            <input type="tel" (input)="updateBudgetItem(budgetItem.id, $event)" value="{{ budgetItem.amount }}" class="expense form-control ms-1 l">
                                         <!-- </ion-item> -->
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)" color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline"></ion-icon>
@@ -74,7 +74,7 @@
                                 <ion-list slot="end">
                                     <ion-item class="ion-item">
                                             <!-- <input type="tel" formControlName="income" value="{{ budgetItem.amount }}" class="form-control ms-1 l"> -->
-                                            <input type="tel" (focusout)="updateBudgetItem(budgetItem.id, $event)" value="{{ budgetItem.amount }}" class="income form-control ms-1 l">
+                                            <input type="tel" (input)="updateBudgetItem(budgetItem.id, $event)" value="{{ budgetItem.amount }}" class="income form-control ms-1 l">
                                         <ion-button (click)="removeBudgetItems(budgetItem.id)"color="danger" size="default" title="Delete expense" class="ion-margin-start">
                                             <ion-icon name="trash-outline" (click)="removeBudgetItems(budgetItem.id)"></ion-icon>
                                         </ion-button>
