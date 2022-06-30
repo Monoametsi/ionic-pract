@@ -65,14 +65,20 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     
   }
 
+  setTotalValsTimer(){
+    setTimeout(()=>{
+      this.setTotalVals();
+    }, 300)
+  }
+
   getBudgetItems(){
 
     if(localStorage.getItem('budget_items')){
       this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      this.setTotalVals()
+      this.setTotalValsTimer()
       window.addEventListener('storage', (e) => {
         this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-          this.setTotalVals()
+          this.setTotalValsTimer()
         return;
       })
     }
@@ -108,7 +114,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
     window.dispatchEvent( new Event('storage') );
     window.addEventListener('storage', (e) => {
-      this.setTotalVals();
+      this.setTotalValsTimer();
       return;
     })
   }
