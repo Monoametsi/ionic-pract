@@ -51,11 +51,13 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     const returnTotals = () => {
       this.budgetCalcForm.controls['total_income'].setValue(totalSumCalc(income));
       this.budgetCalcForm.controls['total_expense'].setValue(totalSumCalc(expense));
-      const totalBudget = Number(this.budgetCalcForm.value.total_income) + Number(this.budgetCalcForm.value.total_expense);
+      const totalBudget = Number(this.budgetCalcForm.value.total_income) - Number(this.budgetCalcForm.value.total_expense);
       this.budgetCalcForm.controls['total_budget'].setValue(totalBudget);
     }
 
-    returnTotals();
+    // setTimeout(()=>{
+      returnTotals();
+    // }, 300)
 
     window.onload = () => {
       returnTotals();
@@ -76,6 +78,24 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     }
   }
 
+  updateBudgetItem(id: number, event: { srcElement: { value: string; }; }){
+    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
+
+    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+      return budgetItem.id === id
+    });
+    
+    getBudgetItems[findItemPos].amount = Number(event.srcElement.value);
+    
+    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
+    window.dispatchEvent( new Event('storage') );
+    window.addEventListener('storage', (e) => {
+        this.setTotalVals();
+      return;
+    })
+
+  }
+
   removeBudgetItems(id: number){
     const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
 
@@ -88,7 +108,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
     window.dispatchEvent( new Event('storage') );
     window.addEventListener('storage', (e) => {
-        this.setTotalVals();
+      this.setTotalVals();
       return;
     })
   }

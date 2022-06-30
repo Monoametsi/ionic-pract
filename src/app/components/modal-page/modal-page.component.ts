@@ -36,7 +36,7 @@ export class ModalPageComponent implements OnInit {
 
   addBudget(){
     const isIncome = this.modalTitle.search(/income/i);
-
+    
     const budget_item:budgetItem = {
       id: this.idGenerator(),
       type: this.findBudgetType(isIncome),
