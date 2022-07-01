@@ -7,17 +7,7 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <!-- <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-  </ion-grid> -->
-
+  
   <form class="ion-margin-top" [formGroup]="addBudgetForm">
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Description</ion-label>
@@ -33,6 +23,6 @@
       <ion-button size="default" (click)="dismiss()">Cancel</ion-button>
       <ion-button size="default ion-margin-start" (click)="addBudget()">Save</ion-button>
     </div>
-    
   </form>
+
 </ion-content>
