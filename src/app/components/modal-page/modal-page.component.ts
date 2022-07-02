@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item'
 import { ModalController } from '@ionic/angular';
 
@@ -12,14 +12,16 @@ import { ModalController } from '@ionic/angular';
 export class ModalPageComponent implements OnInit {
 
   @Input() modalTitle: string;
+  @Output() newBudgetAdd = new EventEmitter();
   addBudgetForm : FormGroup;
+  submitted: boolean = false;
 
   constructor(public modalController: ModalController, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.addBudgetForm = this.formBuilder.group({
-      description: new FormControl(''),
-      budget: new FormControl('')
+      description: new FormControl('', [Validators.required]),
+      budget: new FormControl('', [Validators.required])
     })
   }
 
@@ -35,8 +37,9 @@ export class ModalPageComponent implements OnInit {
   }
 
   addBudget(){
+    this.submitted = true;
     const isIncome = this.modalTitle.search(/income/i);
-    
+
     const budget_item:budgetItem = {
       id: this.idGenerator(),
       type: this.findBudgetType(isIncome),
@@ -60,6 +63,8 @@ export class ModalPageComponent implements OnInit {
 
     budgetItems = JSON.parse(localStorage.getItem('budget_items'));
     budgetItems.push(budget_item);
+
+    this.newBudgetAdd.emit();
 
     return setBudgetItems(budgetItems);
   }
