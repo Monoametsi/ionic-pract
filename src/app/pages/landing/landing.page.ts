@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
 import { ModalController } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
@@ -26,9 +26,9 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       total_income: new FormControl('0'),
       total_budget: new FormControl('0')
     })
-
+    
     this.getBudgetItems();
-
+    
   }
   
   // ngAfterViewInit(): void {}

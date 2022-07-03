@@ -12,7 +12,6 @@ import { ModalController } from '@ionic/angular';
 export class ModalPageComponent implements OnInit {
 
   @Input() modalTitle: string;
-  @Output() newBudgetAdd = new EventEmitter();
   addBudgetForm : FormGroup;
   submitted: boolean = false;
 
@@ -21,7 +20,7 @@ export class ModalPageComponent implements OnInit {
   ngOnInit() {
     this.addBudgetForm = this.formBuilder.group({
       description: new FormControl('', [Validators.required]),
-      budget: new FormControl('', [Validators.required])
+      budget: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')]))
     })
   }
 
@@ -36,37 +35,45 @@ export class ModalPageComponent implements OnInit {
     return type; 
   }
 
+  controls(){
+    // console.log(this.addBudgetForm.controls);
+    return this.addBudgetForm.controls;
+  }
+
   addBudget(){
     this.submitted = true;
-    const isIncome = this.modalTitle.search(/income/i);
-
-    const budget_item:budgetItem = {
-      id: this.idGenerator(),
-      type: this.findBudgetType(isIncome),
-      description: this.addBudgetForm.value.description,
-      amount: Number(this.addBudgetForm.value.budget)
+    console.log(this.controls());
+    if(this.addBudgetForm.invalid){
+      return;
     }
+
+    // const isIncome = this.modalTitle.search(/income/i);
+
+    // const budget_item:budgetItem = {
+    //   id: this.idGenerator(),
+    //   type: this.findBudgetType(isIncome),
+    //   description: this.addBudgetForm.value.description,
+    //   amount: Number(this.addBudgetForm.value.budget)
+    // }
     
-    let budgetItems: budgetItem[] = [];
+    // let budgetItems: budgetItem[] = [];
     
-    const setBudgetItems = (budgetData: budgetItem[]) => {
-      localStorage.setItem('budget_items', JSON.stringify(budgetData));
-      window.dispatchEvent( new Event('storage') )
-      this.dismiss();
-      return budgetData;
-    }
+    // const setBudgetItems = (budgetData: budgetItem[]) => {
+    //   localStorage.setItem('budget_items', JSON.stringify(budgetData));
+    //   window.dispatchEvent( new Event('storage') )
+    //   this.dismiss();
+    //   return budgetData;
+    // }
 
-    if(!localStorage.getItem('budget_items')){
-      budgetItems = [budget_item];
-      return setBudgetItems(budgetItems);
-    }
+    // if(!localStorage.getItem('budget_items')){
+    //   budgetItems = [budget_item];
+    //   return setBudgetItems(budgetItems);
+    // }
 
-    budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    budgetItems.push(budget_item);
+    // budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    // budgetItems.push(budget_item);
 
-    this.newBudgetAdd.emit();
-
-    return setBudgetItems(budgetItems);
+    // return setBudgetItems(budgetItems);
   }
 
   dismiss() {
