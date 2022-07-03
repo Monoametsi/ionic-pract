@@ -11,20 +11,20 @@
   <form class="ion-margin-top" [formGroup]="addBudgetForm">
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Description</ion-label>
-      <ion-input type="text" formControlName="description" required></ion-input>
+      <ion-input type="text" [ngClass]="{'ng-invalid': false }" formControlName="description" required></ion-input>
     </ion-item>
 
-    <div class="alert" *ngIf="submitted && controls().description.errors">
+    <div class="alert" *ngIf="controls().description.errors && (controls().description.dirty || controls().description.touched)">
       <span *ngIf="controls().description.errors?.required" class="text-danger fw-bold">Description is required</span>
     </div>
     
-    <ion-item>
+    <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Estimated Budget</ion-label>
       <ion-input type="tel" formControlName="budget" required></ion-input>
     </ion-item>
 
-    <div class="alert" *ngIf="submitted && controls().budget.errors">
-      <span class="text-danger fw-bold" *ngIf="controls().budget.errors?.required">Budget is required</span><br>
+    <div class="alert d-flex flex-column" *ngIf="controls().budget.errors && (controls().budget.dirty || controls().budget.touched)">
+      <span class="text-danger fw-bold" *ngIf="controls().budget.errors?.required">Budget is required</span>
       <span class="text-danger fw-bold" *ngIf="controls().budget.errors?.pattern">Budget needs to be a number.</span>
     </div>
 

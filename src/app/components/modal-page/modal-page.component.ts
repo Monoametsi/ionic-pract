@@ -19,8 +19,8 @@ export class ModalPageComponent implements OnInit {
 
   ngOnInit() {
     this.addBudgetForm = this.formBuilder.group({
-      description: new FormControl('', [Validators.required]),
-      budget: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')]))
+      description: new FormControl('', {validators: [Validators.required], updateOn: 'blur'}),
+      budget: new FormControl('', {validators: Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')]), updateOn: 'blur'})
     })
   }
 
