@@ -48,9 +48,6 @@ export class ApiService {
     let budgetItems = [];
     if(localStorage.getItem('budget_items')){
       budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      // window.addEventListener('storage', (e) => {
-      //   budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      // })
     };
 
     return of(budgetItems);

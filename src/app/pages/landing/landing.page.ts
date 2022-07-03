@@ -35,7 +35,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   
   // ngAfterViewInit(): void {}
 
-  NanBlocker(e) {
+  NanBlocker(e: { key: number; }) {
     if(isNaN(e.key)){
       return false;
     }
@@ -47,7 +47,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     for(let i = 0; i < inputs.length; i++){
       const input = (<HTMLInputElement> inputs[i]);
 
-      input.onkeydown = (event) => {
+      input.onkeydown = () => {
         return false;
       };
     }
@@ -93,6 +93,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
+        console.log(res)
         this.setTotalVals();
       }, (err) => {
         console.log(err);
