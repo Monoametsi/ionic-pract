@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { budgetItem } from '../shared/budget-item';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ApiService {
     return convertTo5dec;
   }
 
-  addBudget(addBudgetForm, budgetType: string): Observable<budgetItem[]>{
+  addBudget(addBudgetForm:FormGroup, budgetType: string): Observable<budgetItem[]>{
     let budgetItems: budgetItem[] = [];
 
     const budget_item:budgetItem = {
@@ -47,12 +48,10 @@ export class ApiService {
     let budgetItems = [];
     if(localStorage.getItem('budget_items')){
       budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      // this.setTotalValsTimer();
-      window.addEventListener('storage', (e) => {
-        budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-          // this.setTotalValsTimer()
-      })
-    }
+      // window.addEventListener('storage', (e) => {
+      //   budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+      // })
+    };
 
     return of(budgetItems);
   }

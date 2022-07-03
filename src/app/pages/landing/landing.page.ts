@@ -47,8 +47,8 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     for(let i = 0; i < inputs.length; i++){
       const input = (<HTMLInputElement> inputs[i]);
 
-      input.onkeypress = (event) => {
-        return this.NanBlocker(event);
+      input.onkeydown = (event) => {
+        return false;
       };
     }
   }

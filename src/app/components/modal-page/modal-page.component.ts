@@ -24,12 +24,6 @@ export class ModalPageComponent implements OnInit {
       budget: new FormControl('', {validators: Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])})
     })
   }
-
-  idGenerator():number{
-    const id: number = (Math.random() * 100) + 1;
-    const convertTo5dec:number = Number(id.toFixed(5));
-    return convertTo5dec;
-  }
   
   findBudgetType(budgetType:number){
     const type:string = (budgetType !== -1)? 'income' : 'expense';
@@ -41,7 +35,6 @@ export class ModalPageComponent implements OnInit {
   }
 
   addBudget(){
-    
     this.submitted = true;
     
     if(this.addBudgetForm.invalid){
@@ -57,32 +50,6 @@ export class ModalPageComponent implements OnInit {
     }, (err) => {
       console.log(err)
     })
-
-    // const budget_item:budgetItem = {
-    //   id: this.idGenerator(),
-    //   type: this.findBudgetType(isIncome),
-    //   description: this.addBudgetForm.value.description,
-    //   amount: Number(this.addBudgetForm.value.budget)
-    // }
-    
-    // let budgetItems: budgetItem[] = [];
-    
-    // const setBudgetItems = (budgetData: budgetItem[]) => {
-    //   localStorage.setItem('budget_items', JSON.stringify(budgetData));
-    //   window.dispatchEvent( new Event('storage') )
-    //   this.dismiss();
-    //   return budgetData;
-    // }
-
-    // if(!localStorage.getItem('budget_items')){
-    //   budgetItems = [budget_item];
-    //   return setBudgetItems(budgetItems);
-    // }
-
-    // budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    // budgetItems.push(budget_item);
-
-    // return setBudgetItems(budgetItems);
   }
 
   dismiss() {
