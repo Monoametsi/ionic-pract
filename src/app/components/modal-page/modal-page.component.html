@@ -13,7 +13,7 @@
       <ion-label position="floating">Description</ion-label>
       <ion-input type="text" formControlName="description" required></ion-input>
     </ion-item>
-
+    
     <div class="alert" *ngIf="controls().description.errors && (controls().description.dirty || controls().description.touched || submitted)">
       <span *ngIf="controls().description.errors?.required" class="text-danger fw-bold">Description is required</span>
     </div>
@@ -27,7 +27,7 @@
       <span class="text-danger fw-bold" *ngIf="controls().budget.errors?.required">Budget is required</span>
       <span class="text-danger fw-bold" *ngIf="controls().budget.errors?.pattern">Budget needs to be a number.</span>
     </div>
-
+    
     <div class="ion-padding ion-float-right">
       <ion-button size="default" (click)="dismiss()">Cancel</ion-button>
       <ion-button size="default ion-margin-start" (click)="addBudget()">Save</ion-button>

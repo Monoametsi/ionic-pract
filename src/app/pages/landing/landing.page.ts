@@ -28,17 +28,35 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     })
     
     this.getBudgetItems();
-    
+    this.blockNanForTotals();
   }
   
   // ngAfterViewInit(): void {}
 
+  NanBlocker(e) {
+    if(isNaN(e.key)){
+      return false;
+    }
+  }
+
+  blockNanForTotals(){
+    const inputs: HTMLCollectionOf<Element> = document.getElementsByClassName('form-control') as HTMLCollectionOf<HTMLInputElement>;
+
+    for(let i = 0; i < inputs.length; i++){
+      const input = (<HTMLInputElement> inputs[i]);
+      console.log(input);
+      input.onkeypress = (event) => {
+        return this.NanBlocker(event);
+      };
+    }
+  }
+
   setTotalVals(){
-    const income: HTMLCollectionOf<Element> =  document.getElementsByClassName('income') as HTMLCollectionOf<HTMLInputElement>;
+    const income: HTMLCollectionOf<Element> = document.getElementsByClassName('income') as HTMLCollectionOf<HTMLInputElement>;
     const expense: HTMLCollectionOf<Element> = document.getElementsByClassName('expense') as HTMLCollectionOf<HTMLInputElement>;
 
     const totalSumCalc = (elemArr: HTMLCollectionOf<Element>) => {
-      //console.log(elemArr);
+      
       let totalSum: number = 0;
       for(let i = 0; i < elemArr.length; i++){
         const value = Number((<HTMLInputElement> elemArr[i]).value);
@@ -55,7 +73,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       this.budgetCalcForm.controls['total_budget'].setValue(totalBudget);
     }
 
-      returnTotals();
+    returnTotals();
 
     window.onload = () => {
       returnTotals();
