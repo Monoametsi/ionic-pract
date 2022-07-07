@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
 import { ModalController } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-landing',
@@ -17,8 +18,8 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   modal: HTMLElement;
   budgetItems: budgetItem[] = [];
   budgetCalcForm: FormGroup;
-
-  constructor(@Inject(DOCUMENT) document: Document, public modalController: ModalController, private formBuilder: FormBuilder) { }
+  
+  constructor(@Inject(DOCUMENT) document: Document, private apiService: ApiService, public modalController: ModalController, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.budgetCalcForm = this.formBuilder.group({
@@ -44,7 +45,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
     for(let i = 0; i < inputs.length; i++){
       const input = (<HTMLInputElement> inputs[i]);
-      console.log(input);
+      // console.log(input);
       input.onkeypress = (event) => {
         return this.NanBlocker(event);
       };
@@ -88,15 +89,23 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   }
 
   getBudgetItems(){
-    if(localStorage.getItem('budget_items')){
-      this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-      this.setTotalValsTimer();
-      window.addEventListener('storage', (e) => {
-        this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-          this.setTotalValsTimer()
-        return;
+
+    this.apiService.getBudgetItems().subscribe(
+      (res) => {
+        
+        this.budgetItems = res;
+        console.log(this.budgetItems);
+        // setTotalVals();
       })
-    }
+    // if(localStorage.getItem('budget_items')){
+    //   this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    //   this.setTotalValsTimer();
+    //   window.addEventListener('storage', (e) => {
+    //     this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    //       this.setTotalValsTimer()
+    //     return;
+    //   })
+    // }
   }
   
   updateBudgetItem(id: number, event: { srcElement: { value: string; }; }){
@@ -140,4 +149,8 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     return await modal.present();
   }
 
+}
+
+function setTotalVals() {
+  throw new Error('Function not implemented.');
 }

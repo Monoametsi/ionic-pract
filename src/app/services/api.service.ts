@@ -9,5 +9,21 @@ import { budgetItem } from '../shared/budget-item';
 export class ApiService {
 
   constructor() { }
+
+  getBudgetItems(): Observable<budgetItem[]>{
+    let budgetItems = [];
+    if(localStorage.getItem('budget_items')){
+      budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+      // this.setTotalValsTimer();
+      window.addEventListener('storage', (e) => {
+        budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+          // this.setTotalValsTimer()
+      })
+    }
+
+    return of(budgetItems);
+  }
+
+
   
 }
