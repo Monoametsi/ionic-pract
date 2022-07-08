@@ -92,10 +92,10 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
     this.apiService.getBudgetItems().subscribe(
       (res) => {
-        
         this.budgetItems = res;
-        console.log(this.budgetItems);
-        // setTotalVals();
+        this.setTotalVals();
+      }, (err) => {
+        console.log(err);
       })
     // if(localStorage.getItem('budget_items')){
     //   this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
@@ -122,15 +122,22 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   }
 
   removeBudgetItems(id: number){
-    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
-      return budgetItem.id === id
-    })
+    // const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    // const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+    //   return budgetItem.id === id
+    // })
 
-    getBudgetItems.splice(findItemPos, 1);
+    // getBudgetItems.splice(findItemPos, 1);
     
-    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
-    this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    // localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
+    // this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+
+    this.apiService.removeBudgetItems(id).subscribe((res) => {
+        this.budgetItems = res;
+        this.setTotalVals();
+    }, (err) => {
+      console.log(err);
+    });
     this.setTotalValsTimer();
   }
 

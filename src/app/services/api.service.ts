@@ -10,6 +10,10 @@ export class ApiService {
 
   constructor() { }
 
+  addBudget(){
+    
+  }
+
   getBudgetItems(): Observable<budgetItem[]>{
     let budgetItems = [];
     if(localStorage.getItem('budget_items')){
@@ -24,6 +28,17 @@ export class ApiService {
     return of(budgetItems);
   }
 
+  removeBudgetItems(id: number){
+    let budgetItems = [];
+    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+      return budgetItem.id === id
+    })
 
+    getBudgetItems.splice(findItemPos, 1);
+    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
+    budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    return of(budgetItems);
+  }
   
 }

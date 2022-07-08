@@ -42,7 +42,7 @@ export class ModalPageComponent implements OnInit {
 
   addBudget(){
     this.submitted = true;
-    // console.log(this.controls());
+    
     if(this.addBudgetForm.invalid){
       return;
     }
