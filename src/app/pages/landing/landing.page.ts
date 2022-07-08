@@ -113,7 +113,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       console.log(err)
     })
   }
-  
+
   removeBudgetItems(id: number){
     this.apiService.removeBudgetItems(id).subscribe((res) => {
       this.budgetItems = res;
@@ -122,7 +122,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       console.log(err);
     });
   }
-
+  
   async presentModal(event: { el: { id: string; }; }) {
     let modalTitle: string;
 

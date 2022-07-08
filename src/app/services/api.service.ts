@@ -57,7 +57,7 @@ export class ApiService {
     return of(budgetItems);
   }
 
-  removeBudgetItems(id: number){
+  removeBudgetItems(id: number): Observable<budgetItem[]>{
     let budgetItems = [];
     const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
     const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
@@ -70,7 +70,7 @@ export class ApiService {
     return of(budgetItems);
   }
 
-  updateBudgetItem(id: number, value: string){
+  updateBudgetItem(id: number, value: string): Observable<budgetItem[]>{
     const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
     const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
       return budgetItem.id === id
