@@ -30,6 +30,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     
     this.getBudgetItems();
     this.blockNanForTotals();
+    this.getNewAddedItems();
   }
   
   // ngAfterViewInit(): void {}
@@ -45,7 +46,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
     for(let i = 0; i < inputs.length; i++){
       const input = (<HTMLInputElement> inputs[i]);
-      // console.log(input);
+
       input.onkeypress = (event) => {
         return this.NanBlocker(event);
       };
@@ -89,7 +90,6 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   }
 
   getBudgetItems(){
-
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
@@ -97,48 +97,30 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       }, (err) => {
         console.log(err);
       })
-    // if(localStorage.getItem('budget_items')){
-    //   this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    //   this.setTotalValsTimer();
-    //   window.addEventListener('storage', (e) => {
-    //     this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    //       this.setTotalValsTimer()
-    //     return;
-    //   })
-    // }
+  }
+
+  getNewAddedItems(){
+    window.addEventListener('storage', (e) => {
+      this.getBudgetItems();
+      this.setTotalValsTimer();
+    })
   }
   
   updateBudgetItem(id: number, event: { srcElement: { value: string; }; }){
-    const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
-      return budgetItem.id === id
-    });
-    
-    getBudgetItems[findItemPos].amount = Number(event.srcElement.value);
-    
-    localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
-    this.setTotalVals();
-
+    this.apiService.updateBudgetItem(id, event.srcElement.value).subscribe((res) => {
+      this.setTotalVals();
+    }, (err) => {
+      console.log(err)
+    })
   }
-
+  
   removeBudgetItems(id: number){
-    // const getBudgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    // const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
-    //   return budgetItem.id === id
-    // })
-
-    // getBudgetItems.splice(findItemPos, 1);
-    
-    // localStorage.setItem('budget_items', JSON.stringify(getBudgetItems));
-    // this.budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-
     this.apiService.removeBudgetItems(id).subscribe((res) => {
-        this.budgetItems = res;
-        this.setTotalVals();
+      this.budgetItems = res;
+      this.setTotalValsTimer();
     }, (err) => {
       console.log(err);
     });
-    this.setTotalValsTimer();
   }
 
   async presentModal(event: { el: { id: string; }; }) {
@@ -156,8 +138,4 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     return await modal.present();
   }
 
-}
-
-function setTotalVals() {
-  throw new Error('Function not implemented.');
 }

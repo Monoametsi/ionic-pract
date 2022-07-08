@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../../services/api.service';
 import { budgetItem } from 'src/app/shared/budget-item'
 import { ModalController } from '@ionic/angular';
 
@@ -15,7 +16,7 @@ export class ModalPageComponent implements OnInit {
   addBudgetForm : FormGroup;
   submitted: boolean = false;
 
-  constructor(public modalController: ModalController, private formBuilder: FormBuilder) { }
+  constructor(public modalController: ModalController, private apiService: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.addBudgetForm = this.formBuilder.group({
@@ -36,44 +37,52 @@ export class ModalPageComponent implements OnInit {
   }
 
   controls(){
-    // console.log(this.addBudgetForm.controls);
     return this.addBudgetForm.controls;
   }
 
   addBudget(){
+    
     this.submitted = true;
     
     if(this.addBudgetForm.invalid){
       return;
     }
 
-    const isIncome = this.modalTitle.search(/income/i);
+    const isIncome:number = this.modalTitle.search(/income/i);
 
-    const budget_item:budgetItem = {
-      id: this.idGenerator(),
-      type: this.findBudgetType(isIncome),
-      description: this.addBudgetForm.value.description,
-      amount: Number(this.addBudgetForm.value.budget)
-    }
-    
-    let budgetItems: budgetItem[] = [];
-    
-    const setBudgetItems = (budgetData: budgetItem[]) => {
-      localStorage.setItem('budget_items', JSON.stringify(budgetData));
-      window.dispatchEvent( new Event('storage') )
+    const budgetType:string = this.findBudgetType(isIncome);
+
+    this.apiService.addBudget(this.addBudgetForm, budgetType).subscribe((res) => {
       this.dismiss();
-      return budgetData;
-    }
+    }, (err) => {
+      console.log(err)
+    })
 
-    if(!localStorage.getItem('budget_items')){
-      budgetItems = [budget_item];
-      return setBudgetItems(budgetItems);
-    }
+    // const budget_item:budgetItem = {
+    //   id: this.idGenerator(),
+    //   type: this.findBudgetType(isIncome),
+    //   description: this.addBudgetForm.value.description,
+    //   amount: Number(this.addBudgetForm.value.budget)
+    // }
+    
+    // let budgetItems: budgetItem[] = [];
+    
+    // const setBudgetItems = (budgetData: budgetItem[]) => {
+    //   localStorage.setItem('budget_items', JSON.stringify(budgetData));
+    //   window.dispatchEvent( new Event('storage') )
+    //   this.dismiss();
+    //   return budgetData;
+    // }
 
-    budgetItems = JSON.parse(localStorage.getItem('budget_items'));
-    budgetItems.push(budget_item);
+    // if(!localStorage.getItem('budget_items')){
+    //   budgetItems = [budget_item];
+    //   return setBudgetItems(budgetItems);
+    // }
 
-    return setBudgetItems(budgetItems);
+    // budgetItems = JSON.parse(localStorage.getItem('budget_items'));
+    // budgetItems.push(budget_item);
+
+    // return setBudgetItems(budgetItems);
   }
 
   dismiss() {
