@@ -20,7 +20,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   budgetCalcForm: FormGroup;
   
   constructor(@Inject(DOCUMENT) document: Document, private apiService: ApiService, public modalController: ModalController, private formBuilder: FormBuilder) { }
-
+  
   ngOnInit() {
     this.budgetCalcForm = this.formBuilder.group({
       total_expense: new FormControl('0'),
@@ -30,7 +30,6 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     
     this.getBudgetItems();
     this.blockNanForTotals();
-    this.getNewAddedItems();
   }
   
   // ngAfterViewInit(): void {}
@@ -93,18 +92,11 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
-        console.log(res)
-        this.setTotalVals();
+        console.log(res);
+        this.setTotalValsTimer();
       }, (err) => {
         console.log(err);
       })
-  }
-
-  getNewAddedItems(){
-    window.addEventListener('storage', (e) => {
-      this.getBudgetItems();
-      this.setTotalValsTimer();
-    })
   }
   
   updateBudgetItem(id: number, event: { srcElement: { value: string; }; }){
@@ -117,7 +109,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
   removeBudgetItems(id: number){
     this.apiService.removeBudgetItems(id).subscribe((res) => {
-      this.budgetItems = res;
+      this.getBudgetItems();
       this.setTotalValsTimer();
     }, (err) => {
       console.log(err);
@@ -135,8 +127,14 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
         'modalTitle': modalTitle
       }
     });
+
+    await modal.present();
+    const isItemAdded = (await modal.onDidDismiss());
     
-    return await modal.present();
+    if(isItemAdded.data.itemAdded){
+      this.getBudgetItems();
+      this.setTotalValsTimer();
+    }
   }
 
 }

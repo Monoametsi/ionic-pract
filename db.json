@@ -1,38 +1,52 @@
-[
+{
+  "budgetItems": [
     {
-        "id": 12.39523,
-        "type": "income",
-        "description": "Savings",
-        "amount": 6000
+      "id": 12.39523,
+      "type": "income",
+      "description": "Savings",
+      "amount": 6000
     },
     {
-        "id": 86.46707,
-        "type": "income",
-        "description": "Ikhokha",
-        "amount": 16000
+      "id": 86.46707,
+      "type": "income",
+      "description": "Ikhokha",
+      "amount": 16000
     },
     {
-        "id": 34.5,
-        "type": "income",
-        "description": "DA",
-        "amount": 5662
+      "id": 66.35586,
+      "type": "expense",
+      "description": "Rent",
+      "amount": 3000
     },
     {
-        "id": 29.81276,
-        "type": "income",
-        "description": "Waiter",
-        "amount": 1000
+      "id": 58.24257,
+      "type": "expense",
+      "description": "Groza",
+      "amount": 800
     },
     {
-        "id": 66.35586,
-        "type": "expense",
-        "description": "Rent",
-        "amount": 3000
+      "type": "expense",
+      "description": "Electricity",
+      "amount": 400,
+      "id": 88.46707
     },
     {
-        "id": 58.24257,
-        "type": "expense",
-        "description": "Groza",
-        "amount": 800
+      "type": "expense",
+      "description": "Water",
+      "amount": 300,
+      "id": 89.46707
+    },
+    {
+      "type": "income",
+      "description": "DA",
+      "amount": 5662,
+      "id": 90.46707
+    },
+    {
+      "type": "income",
+      "description": "Waiter",
+      "amount": 1000,
+      "id": 91.46707
     }
-]
+  ]
+}
