@@ -22,7 +22,7 @@
       "id": 58.24257,
       "type": "expense",
       "description": "Groza",
-      "amount": 800
+      "amount": 900
     },
     {
       "type": "expense",
@@ -33,7 +33,7 @@
     {
       "type": "expense",
       "description": "Water",
-      "amount": 300,
+      "amount": 4009,
       "id": 89.46707
     },
     {

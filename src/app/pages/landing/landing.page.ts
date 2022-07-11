@@ -99,9 +99,17 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
       })
   }
   
-  updateBudgetItem(id: number, event: { srcElement: { value: string; }; }){
-    this.apiService.updateBudgetItem(id, event.srcElement.value).subscribe((res) => {
-      this.setTotalVals();
+  updateBudgetItem(id: number, event: { srcElement: { value: string; }; }, item: budgetItem){
+    item.amount = Number(event.srcElement.value);
+    this.setTotalVals();
+    this.apiService.updateBudgetItem(id, item).subscribe((res) => {
+      // const getBudgetItems = this.budgetItems;
+      // const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
+      //   return budgetItem.id === id
+      // });
+      
+      // getBudgetItems[findItemPos].amount = Number(event.srcElement.value);
+      console.log(res)
     }, (err) => {
       console.log(err)
     })
