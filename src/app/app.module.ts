@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ModalPageComponent } from './components/modal-page/modal-page.component';
-import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, ModalPageComponent],

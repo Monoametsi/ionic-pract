@@ -14,6 +14,7 @@ import { ApiService } from '../../services/api.service';
 
 export class LandingPage implements OnInit/*, AfterViewInit */{
   // @ViewChild('income') income;
+  closeLoad: boolean;
   isModalOpen: boolean;
   modal: HTMLElement;
   budgetItems: budgetItem[] = [];
@@ -35,11 +36,20 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   
   // ngAfterViewInit(): void {}
 
-  async runLoader(){
-    const x = (await this.loader.create());
-    x.cssClass = `bg-dark`
-    
-    return x;
+  async getLoader(){
+    const loader = (await this.loader.create());
+    return loader;
+  }
+
+  async presentLoader(){
+    const loader = await this.getLoader();
+    loader.present();
+  }
+
+  async dismissLoader(){
+   await this.loader.dismiss({
+      'dismissed': true
+    })
   }
 
   NanBlocker(e: { key: number; }) {
@@ -97,14 +107,10 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   }
 
   async getBudgetItems(){
-    // const x = await this.runLoader();
-    // x.present();
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
-        // this.loader.dismiss({
-        //   'dismissed': true
-        // });
+        this.closeLoad = true;
         console.log(res);
         this.setTotalValsTimer();
       }, (err) => {
@@ -114,7 +120,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
   newlyAddedItem(){
     this.apiService.getBudgetItems().subscribe(
-      (res) => {
+      async (res) => {
         const newItem = res[res.length - 1];
         this.budgetItems.push(newItem);
         this.setTotalValsTimer();
@@ -129,32 +135,32 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     item.amount = Number(event.srcElement.value.trim());
     this.setTotalVals()
     if(this.change !== 'false') clearTimeout(this.change);
-   this.change = setTimeout(() => {
-        this.apiService.updateBudgetItem(id, item).subscribe((res) => {
-      }, (err) => {
-        console.log(err)
-      })
-      this.change = 'false';
+    this.change = setTimeout(() => {
+          this.apiService.updateBudgetItem(id, item).subscribe((res) => {
+        }, (err) => {
+          console.log(err)
+        })
+        this.change = 'false';
     },300); 
   }
 
-  removeBudgetItems(id: number){
-    this.apiService.removeBudgetItems(id).subscribe((res) => {
+  async removeBudgetItems(id: number){
+    await this.presentLoader();
+    this.apiService.removeBudgetItems(id).subscribe(async (res) => {
       const findItemPos = this.budgetItems.findIndex((budgetItem: budgetItem) => {
         return budgetItem.id === id
       })
   
       this.budgetItems.splice(findItemPos, 1);
       this.setTotalValsTimer();
+      await this.dismissLoader();
     }, (err) => {
       console.log(err);
     });
   }
   
   async presentModal(event: { el: { id: string; }; }) {
-    let modalTitle: string;
-
-    modalTitle = (event.el.id === 'expense')? 'Add Expense' : 'Add Income';
+    const modalTitle: string  = (event.el.id === 'expense')? 'Add Expense' : 'Add Income';
     
     const modal = await this.modalController.create({
       component: ModalPageComponent,
@@ -164,7 +170,7 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     });
 
     await modal.present();
-    const isItemAdded = (await modal.onDidDismiss());
+    const isItemAdded = await modal.onDidDismiss();
     if(isItemAdded.data && isItemAdded.data.itemAdded){
       this.newlyAddedItem();
     }

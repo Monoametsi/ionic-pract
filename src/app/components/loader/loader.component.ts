@@ -10,12 +10,9 @@ export class LoaderComponent implements OnInit {
 
   constructor(public loader: LoadingController) { }
 
-  ngOnInit() {
-    this.runLoader();
-  }
+  ngOnInit() {}
 
   runLoader(){
-    
   }
 
 }

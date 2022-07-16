@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { budgetItem } from 'src/app/shared/budget-item';
 
 @Component({
@@ -16,12 +16,28 @@ export class ModalPageComponent implements OnInit {
   addBudgetForm : FormGroup;
   submitted: boolean = false;
 
-  constructor(public modalController: ModalController, private apiService: ApiService, private formBuilder: FormBuilder) { }
+  constructor(public modalController: ModalController, public loader: LoadingController, private apiService: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.addBudgetForm = this.formBuilder.group({
       description: new FormControl('', {validators: [Validators.required]}),
       budget: new FormControl('', {validators: Validators.compose([Validators.required, Validators.pattern('^[0-9]+$')])})
+    })
+  }
+
+  async getLoader(){
+    const loader = (await this.loader.create());
+    return loader;
+  }
+
+  async presentLoader(){
+    const loader = await this.getLoader();
+    loader.present();
+  }
+
+  async dismissLoader(){
+   await this.loader.dismiss({
+      'dismissed': true
     })
   }
   
@@ -34,7 +50,7 @@ export class ModalPageComponent implements OnInit {
     return this.addBudgetForm.controls;
   }
 
-  addBudget(){
+  async addBudget(){
     this.submitted = true;
     
     if(this.addBudgetForm.invalid){
@@ -50,9 +66,11 @@ export class ModalPageComponent implements OnInit {
       description: this.addBudgetForm.value.description,
       amount: Number(this.addBudgetForm.value.budget)
     }
-
-    this.apiService.addBudget(budget_item).subscribe((res) => {
+    
+    await this.presentLoader();
+    this.apiService.addBudget(budget_item).subscribe(async (res) => {
       this.dismiss(true);
+      await this.dismissLoader();
     }, (err) => {
       console.log(err)
     })
