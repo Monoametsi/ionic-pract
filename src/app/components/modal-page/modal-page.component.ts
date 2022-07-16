@@ -25,16 +25,11 @@ export class ModalPageComponent implements OnInit {
     })
   }
 
-  async getLoader(){
-    const loader = (await this.loader.create());
-    return loader;
-  }
-
   async presentLoader(){
-    const loader = await this.getLoader();
+    const loader = (await this.loader.create());
     loader.present();
   }
-
+  
   async dismissLoader(){
    await this.loader.dismiss({
       'dismissed': true

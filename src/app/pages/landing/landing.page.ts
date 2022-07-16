@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
@@ -12,8 +12,7 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./landing.page.scss'],
 })
 
-export class LandingPage implements OnInit/*, AfterViewInit */{
-  // @ViewChild('income') income;
+export class LandingPage implements OnInit{
   closeLoad: boolean;
   isModalOpen: boolean;
   modal: HTMLElement;
@@ -23,8 +22,6 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   constructor(@Inject(DOCUMENT) document: Document, public loader: LoadingController, private apiService: ApiService, public modalController: ModalController, private formBuilder: FormBuilder) { }
   
   ngOnInit() {
-    // this.runLoader();
-
     this.budgetCalcForm = this.formBuilder.group({
       total_expense: new FormControl('0'),
       total_income: new FormControl('0'),
@@ -33,17 +30,10 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     this.getBudgetItems();
     this.blockNanForTotals();
   }
-  
-  // ngAfterViewInit(): void {}
-
-  async getLoader(){
-    const loader = (await this.loader.create());
-    return loader;
-  }
 
   async presentLoader(){
-    const loader = await this.getLoader();
-    loader.present();
+    const loader = (await this.loader.create());
+    return loader.present();
   }
 
   async dismissLoader(){
