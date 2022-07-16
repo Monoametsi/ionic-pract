@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/co
 import { ModalPageComponent } from 'src/app/components/modal-page/modal-page.component';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { budgetItem } from 'src/app/shared/budget-item';
-import { ModalController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 
@@ -19,20 +19,28 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
   budgetItems: budgetItem[] = [];
   budgetCalcForm: FormGroup;
   
-  constructor(@Inject(DOCUMENT) document: Document, private apiService: ApiService, public modalController: ModalController, private formBuilder: FormBuilder) { }
+  constructor(@Inject(DOCUMENT) document: Document, public loader: LoadingController, private apiService: ApiService, public modalController: ModalController, private formBuilder: FormBuilder) { }
   
   ngOnInit() {
+    // this.runLoader();
+
     this.budgetCalcForm = this.formBuilder.group({
       total_expense: new FormControl('0'),
       total_income: new FormControl('0'),
       total_budget: new FormControl('0')
     })
-    
     this.getBudgetItems();
     this.blockNanForTotals();
   }
   
   // ngAfterViewInit(): void {}
+
+  async runLoader(){
+    const x = (await this.loader.create());
+    x.cssClass = `bg-dark`
+    
+    return x;
+  }
 
   NanBlocker(e: { key: number; }) {
     if(isNaN(e.key)){
@@ -88,36 +96,55 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
     }, 300)
   }
 
-  getBudgetItems(){
+  async getBudgetItems(){
+    // const x = await this.runLoader();
+    // x.present();
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
+        // this.loader.dismiss({
+        //   'dismissed': true
+        // });
         console.log(res);
         this.setTotalValsTimer();
       }, (err) => {
         console.log(err);
       })
   }
+
+  newlyAddedItem(){
+    this.apiService.getBudgetItems().subscribe(
+      (res) => {
+        const newItem = res[res.length - 1];
+        this.budgetItems.push(newItem);
+        this.setTotalValsTimer();
+      }, (err) => {
+        console.log(err);
+      })
+  }
+
+  change: string | NodeJS.Timeout = 'false';
   
   updateBudgetItem(id: number, event: { srcElement: { value: string; }; }, item: budgetItem){
-    item.amount = Number(event.srcElement.value);
-    this.setTotalVals();
-    this.apiService.updateBudgetItem(id, item).subscribe((res) => {
-      // const getBudgetItems = this.budgetItems;
-      // const findItemPos = getBudgetItems.findIndex((budgetItem: budgetItem) => {
-      //   return budgetItem.id === id
-      // });
-      
-      // getBudgetItems[findItemPos].amount = Number(event.srcElement.value);
-      console.log(res)
-    }, (err) => {
-      console.log(err)
-    })
+    item.amount = Number(event.srcElement.value.trim());
+    this.setTotalVals()
+    if(this.change !== 'false') clearTimeout(this.change);
+   this.change = setTimeout(() => {
+        this.apiService.updateBudgetItem(id, item).subscribe((res) => {
+      }, (err) => {
+        console.log(err)
+      })
+      this.change = 'false';
+    },300); 
   }
 
   removeBudgetItems(id: number){
     this.apiService.removeBudgetItems(id).subscribe((res) => {
-      this.getBudgetItems();
+      const findItemPos = this.budgetItems.findIndex((budgetItem: budgetItem) => {
+        return budgetItem.id === id
+      })
+  
+      this.budgetItems.splice(findItemPos, 1);
       this.setTotalValsTimer();
     }, (err) => {
       console.log(err);
@@ -138,10 +165,8 @@ export class LandingPage implements OnInit/*, AfterViewInit */{
 
     await modal.present();
     const isItemAdded = (await modal.onDidDismiss());
-    
-    if(isItemAdded.data.itemAdded){
-      this.getBudgetItems();
-      this.setTotalValsTimer();
+    if(isItemAdded.data && isItemAdded.data.itemAdded){
+      this.newlyAddedItem();
     }
   }
 

@@ -4,37 +4,13 @@
       "id": 12.39523,
       "type": "income",
       "description": "Savings",
-      "amount": 6000
-    },
-    {
-      "id": 86.46707,
-      "type": "income",
-      "description": "Ikhokha",
-      "amount": 16000
-    },
-    {
-      "id": 66.35586,
-      "type": "expense",
-      "description": "Rent",
-      "amount": 3000
+      "amount": 8500
     },
     {
       "id": 58.24257,
       "type": "expense",
       "description": "Groza",
-      "amount": 900
-    },
-    {
-      "type": "expense",
-      "description": "Electricity",
-      "amount": 400,
-      "id": 88.46707
-    },
-    {
-      "type": "expense",
-      "description": "Water",
-      "amount": 4009,
-      "id": 89.46707
+      "amount": 800
     },
     {
       "type": "income",
@@ -43,10 +19,40 @@
       "id": 90.46707
     },
     {
+      "type": "expense",
+      "description": "Rent",
+      "amount": 6600,
+      "id": 91.46707
+    },
+    {
+      "type": "income",
+      "description": "Ikhokha",
+      "amount": 16800,
+      "id": 92.46707
+    },
+    {
+      "type": "expense",
+      "description": "Wifi",
+      "amount": 400,
+      "id": 95.46707
+    },
+    {
+      "type": "expense",
+      "description": "Water",
+      "amount": 400,
+      "id": 96.46707
+    },
+    {
+      "type": "expense",
+      "description": "Transport",
+      "amount": 1500,
+      "id": 97.46707
+    },
+    {
       "type": "income",
       "description": "Waiter",
       "amount": 1000,
-      "id": 91.46707
+      "id": 98.46707
     }
   ]
 }
