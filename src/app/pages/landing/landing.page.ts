@@ -100,9 +100,9 @@ export class LandingPage implements OnInit{
     this.apiService.getBudgetItems().subscribe(
       (res) => {
         this.budgetItems = res;
-        this.closeLoad = true;
         console.log(res);
         this.setTotalValsTimer();
+        this.closeLoad = true;
       }, (err) => {
         console.log(err);
       })

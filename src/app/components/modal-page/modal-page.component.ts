@@ -37,7 +37,7 @@ export class ModalPageComponent implements OnInit {
   }
   
   findBudgetType(budgetType:number){
-    const type:string = (budgetType !== -1)? 'income' : 'expense';
+    const type:budgetItem['type'] = (budgetType !== -1)? 'income' : 'expense';
     return type; 
   }
 
@@ -54,7 +54,7 @@ export class ModalPageComponent implements OnInit {
 
     const isIncome:number = this.modalTitle.search(/income/i);
 
-    const budgetType:string = this.findBudgetType(isIncome);
+    const budgetType:budgetItem['type'] = this.findBudgetType(isIncome);
 
     const budget_item:budgetItem = {
       type: budgetType,

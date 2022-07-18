@@ -1,6 +1,6 @@
 export interface budgetItem {
     id?: number,
-    type: string,
+    type: "expense" | "income",
     description: string,
     amount: number
 }

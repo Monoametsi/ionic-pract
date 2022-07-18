@@ -1,6 +1,12 @@
 <ion-app>
-  <app-navbar></app-navbar>
-  <ion-content style="margin-top: 10rem">
-    <ion-router-outlet></ion-router-outlet>
-  </ion-content>
+  <ion-menu type="overlay" contentId="main">
+    <ion-header>
+      <ion-toolbar color="dark">
+          <ion-title class="title fw-bold fs-2 ion-padding">
+            SaveMyPennies
+          </ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

@@ -7,6 +7,7 @@ import { LandingPageRoutingModule } from './landing-routing.module';
 
 import { LandingPage} from './landing.page';
 import { LoaderComponent } from 'src/app/components/loader/loader.component';
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { LoaderComponent } from 'src/app/components/loader/loader.component';
     IonicModule,
     LandingPageRoutingModule
   ],
-  declarations: [LandingPage, LoaderComponent]
+  declarations: [LandingPage, NavbarComponent, LoaderComponent]
 })
 export class LandingPageModule {}

@@ -15,7 +15,7 @@
     {
       "type": "expense",
       "description": "Rent",
-      "amount": 4600,
+      "amount": 5000,
       "id": 99.46707
     },
     {
@@ -33,7 +33,7 @@
     {
       "type": "expense",
       "description": "Transport",
-      "amount": 3500,
+      "amount": 2000,
       "id": 102.46707
     },
     {
@@ -45,20 +45,26 @@
     {
       "type": "expense",
       "description": "Groza",
-      "amount": 800,
+      "amount": 600,
       "id": 104.46707
+    },
+    {
+      "type": "expense",
+      "description": "Table",
+      "amount": 500,
+      "id": 107.46707
+    },
+    {
+      "type": "expense",
+      "description": "Fridge",
+      "amount": 2200,
+      "id": 108.46707
     },
     {
       "type": "income",
       "description": "DA",
       "amount": 5662,
-      "id": 106.46707
-    },
-    {
-      "type": "expense",
-      "description": "Table",
-      "amount": 1200,
-      "id": 107.46707
+      "id": 109.46707
     }
   ]
 }

@@ -6,12 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ModalPageComponent } from './components/modal-page/modal-page.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, ModalPageComponent],
+  declarations: [AppComponent, ModalPageComponent],
   imports: [HttpClientModule, ReactiveFormsModule, FormsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
