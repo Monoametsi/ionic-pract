@@ -158,8 +158,9 @@ export class LandingPage implements OnInit{
         'modalTitle': modalTitle
       }
     });
-
+    
     await modal.present();
+
     const isItemAdded = await modal.onDidDismiss();
     if(isItemAdded.data && isItemAdded.data.itemAdded){
       this.newlyAddedItem();

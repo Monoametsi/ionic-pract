@@ -9,26 +9,14 @@
     {
       "type": "income",
       "description": "Ikhokha",
-      "amount": 16900,
+      "amount": 17477,
       "id": 92.46707
     },
     {
       "type": "expense",
       "description": "Rent",
-      "amount": 5000,
+      "amount": 4800,
       "id": 99.46707
-    },
-    {
-      "type": "expense",
-      "description": "Water",
-      "amount": 400,
-      "id": 100.46707
-    },
-    {
-      "type": "expense",
-      "description": "Wifi",
-      "amount": 400,
-      "id": 101.46707
     },
     {
       "type": "expense",
@@ -47,12 +35,6 @@
       "description": "Groza",
       "amount": 600,
       "id": 104.46707
-    },
-    {
-      "type": "expense",
-      "description": "Table",
-      "amount": 500,
-      "id": 107.46707
     },
     {
       "type": "expense",

@@ -3,7 +3,37 @@
       <ion-title class="title fw-bold fs-2 ion-padding">
         SaveMyPennies
       </ion-title>
-      <ion-buttons slot="end" class="ion-padding ion-hide-sm-down">
+      <ion-button size="small" slot="end" class="ion-hide-lg-down"> 
+        Create a Budget
+      </ion-button>
+      <ion-buttons slot="end" class="ion-padding ion-hide-lg-down">
+
+        <ion-item class="auth-link" id="trigger" color="undefined" lines="none" detail>
+          <ion-label role="button">
+            My Budgets
+          </ion-label>
+        </ion-item>
+
+        <ion-popover trigger="trigger" [dismissOnSelect]="true">
+          <ng-template>
+              <ion-item button lines="full">
+                <ion-label>
+                  Click
+                </ion-label>
+              </ion-item>
+              <ion-item button lines="full">
+                <ion-label>
+                  Click
+                </ion-label>
+              </ion-item>
+              <ion-item button lines="full">
+                <ion-label>
+                  Click
+                </ion-label>
+              </ion-item>
+          </ng-template>
+        </ion-popover>
+
         <ion-text routerLink="/login" color="light ion-padding auth-link" role="button">
           Sign in
         </ion-text> /
@@ -12,7 +42,7 @@
           Sign up
         </ion-text>
       </ion-buttons>
-      <ion-buttons slot="end" class="ion-padding ion-hide-sm-up">
+      <ion-buttons slot="end" class="ion-padding ion-hide-lg-up">
           <ion-menu-button></ion-menu-button>
       </ion-buttons>
   </ion-toolbar>
