@@ -9,7 +9,7 @@ import { PopoverController } from '@ionic/angular';
 })
 export class NavbarComponent implements OnInit {
   currentPageHome = false;
-  constructor(private router: Router, private popOver: PopoverController) { }
+  constructor(private router: Router, private popOverCtrl: PopoverController) { }
 
   ngOnInit() {
     this.checkIfHome();
@@ -27,8 +27,11 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  async presentPopOver(){
-    
+  async presentPopOver(e: Event){
+    // const popOver = await this.popOverCtrl.create({
+    //   component: ,
+    //   event: e
+    // })
   }
 
 }
