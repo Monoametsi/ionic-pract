@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
       event: e
     })
 
-    
+    await popOver.present();
   }
 
 }

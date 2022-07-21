@@ -12,13 +12,13 @@
       </ion-button>
       <ion-buttons slot="end" class="ion-padding ion-hide-lg-down">
         
-        <ion-item class="auth-link" id="trigger" color="undefined" lines="none" detail>
+        <ion-item class="auth-link" (click)="presentPopOver($event)" color="undefined" lines="none" detail>
           <ion-label role="button">
             My Budgets
           </ion-label>
         </ion-item>
 
-        <ion-popover trigger="trigger" [dismissOnSelect]="true">
+        <!-- <ion-popover trigger="trigger" [dismissOnSelect]="true">
           <ng-template>
               <ion-item button lines="full">
                 <ion-label>
@@ -36,7 +36,7 @@
                 </ion-label>
               </ion-item>
           </ng-template>
-        </ion-popover>
+        </ion-popover> -->
 
         <ion-text routerLink="/login" color="light ion-padding auth-link" role="button">
           Sign in
