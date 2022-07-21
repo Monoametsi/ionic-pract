@@ -1,13 +1,17 @@
 <ion-header>
   <ion-toolbar color="dark">
-      <ion-title class="title fw-bold fs-2 ion-padding">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="!currentPageHome" defaultHref="/"></ion-back-button>
+    </ion-buttons> 
+    
+      <ion-title class="title fw-bold fs-2 ion-padding" routerLink="/" role="button">
         SaveMyPennies
       </ion-title>
       <ion-button size="small" slot="end" class="ion-hide-lg-down"> 
         Create a Budget
       </ion-button>
       <ion-buttons slot="end" class="ion-padding ion-hide-lg-down">
-
+        
         <ion-item class="auth-link" id="trigger" color="undefined" lines="none" detail>
           <ion-label role="button">
             My Budgets

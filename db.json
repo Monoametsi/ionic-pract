@@ -1,34 +1,16 @@
 {
   "budgetItems": [
     {
-      "id": 12.39523,
-      "type": "income",
-      "description": "Savings",
-      "amount": 8800
-    },
-    {
       "type": "income",
       "description": "Ikhokha",
-      "amount": 17477,
+      "amount": 16900,
       "id": 92.46707
     },
     {
       "type": "expense",
       "description": "Rent",
-      "amount": 4800,
+      "amount": 5500,
       "id": 99.46707
-    },
-    {
-      "type": "expense",
-      "description": "Transport",
-      "amount": 2000,
-      "id": 102.46707
-    },
-    {
-      "type": "expense",
-      "description": "Electricity",
-      "amount": 600,
-      "id": 103.46707
     },
     {
       "type": "expense",
@@ -37,16 +19,22 @@
       "id": 104.46707
     },
     {
-      "type": "expense",
-      "description": "Fridge",
-      "amount": 2200,
-      "id": 108.46707
+      "type": "income",
+      "description": "Savings",
+      "amount": 8800,
+      "id": 113.46707
     },
     {
       "type": "income",
       "description": "DA",
       "amount": 5662,
-      "id": 109.46707
+      "id": 114.46707
+    },
+    {
+      "type": "expense",
+      "description": "Debt Payment",
+      "amount": 15000,
+      "id": 115.46707
     }
   ]
 }
