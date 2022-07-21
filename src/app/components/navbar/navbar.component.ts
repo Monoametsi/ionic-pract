@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-navbar',
@@ -28,10 +29,12 @@ export class NavbarComponent implements OnInit {
   }
 
   async presentPopOver(e: Event){
-    // const popOver = await this.popOverCtrl.create({
-    //   component: ,
-    //   event: e
-    // })
+    const popOver = await this.popOverCtrl.create({
+      component: PopoverComponent,
+      event: e
+    })
+
+    
   }
 
 }
