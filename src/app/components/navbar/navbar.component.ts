@@ -10,7 +10,7 @@ import { PopoverComponent } from '../popover/popover.component';
 })
 export class NavbarComponent implements OnInit {
   currentPageHome = false;
-  constructor(private router: Router, private popOverCtrl: PopoverController) { }
+  constructor(private router: Router, public popOverCtrl: PopoverController) { }
 
   ngOnInit() {
     this.checkIfHome();
