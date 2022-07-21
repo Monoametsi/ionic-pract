@@ -1,3 +1,40 @@
 <ion-content>
   <app-navbar></app-navbar>
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="6">
+        <ion-card>
+          <ion-card-header color="primary">
+            <ion-card-title class="ion-text-center title">
+              Sign In
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form>
+              <ion-item>
+                <ion-label position="floating">
+                  Email
+                </ion-label>
+                <ion-input type="email"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">
+                  Password
+                </ion-label>
+                <ion-input type="password"></ion-input>
+              </ion-item>
+            </form>
+          </ion-card-content>
+          <ion-card-header class="footer">
+            <ion-button class="title" expand="block" size="default">Sign In</ion-button>
+
+            <ion-card-subtitle class="ion-text-center ion-padding-top">
+              Don't have an account? <a routerLink="/register">Sign Up</a>
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
