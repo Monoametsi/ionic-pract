@@ -10,20 +10,39 @@
               Sign In
             </ion-card-title>
           </ion-card-header>
-          <ion-card-content>
+          <ion-card-content class="content">
             <form>
-              <ion-item>
-                <ion-label position="floating">
-                  Email
-                </ion-label>
-                <ion-input type="email"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">
-                  Password
-                </ion-label>
-                <ion-input type="password"></ion-input>
-              </ion-item>
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label position="floating">
+                        Email
+                      </ion-label>
+                      <ion-input type="email"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-item>
+                      <ion-label position="floating">
+                        Password
+                      </ion-label>
+                      <ion-input type="password"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="ion-text-end">
+                    <ion-text routerLink="/" role="button">
+                      <a routerLink="/" >Forget Password?</a>
+                    </ion-text>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+              
             </form>
           </ion-card-content>
           <ion-card-header class="footer">

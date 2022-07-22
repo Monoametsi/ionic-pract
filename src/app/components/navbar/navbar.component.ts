@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
+import { AddBudgetModalComponent } from '../add-budget-modal/add-budget-modal.component';
 import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { PopoverComponent } from '../popover/popover.component';
 })
 export class NavbarComponent implements OnInit {
   currentPageHome = false;
-  constructor(private router: Router, public popOverCtrl: PopoverController) { }
+  constructor(private router: Router, public popOverCtrl: PopoverController, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.checkIfHome();
@@ -35,6 +36,14 @@ export class NavbarComponent implements OnInit {
     })
 
     await popOver.present();
+  }
+
+  async presentModal(){
+    const modal = await this.modalCtrl.create({
+      component: AddBudgetModalComponent
+    })
+
+    await modal.present();
   }
 
 }
