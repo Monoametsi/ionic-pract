@@ -14,7 +14,7 @@ export class AppComponent {
     const modal = await this.modalCtrl.create({
       component: AddBudgetModalComponent
     })
-
+    
     await modal.present();
   }
 }
