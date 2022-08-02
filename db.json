@@ -3,13 +3,13 @@
     {
       "type": "income",
       "description": "Ikhokha",
-      "amount": 16900,
+      "amount": 17441,
       "id": 92.46707
     },
     {
       "type": "expense",
       "description": "Rent",
-      "amount": 5500,
+      "amount": 4500,
       "id": 99.46707
     },
     {
@@ -32,9 +32,15 @@
     },
     {
       "type": "expense",
-      "description": "Debt Payment",
-      "amount": 15000,
+      "description": "Transport",
+      "amount": 2500,
       "id": 115.46707
+    },
+    {
+      "type": "expense",
+      "description": "Debt Payment",
+      "amount": 10000,
+      "id": 116.46707
     }
   ]
 }

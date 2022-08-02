@@ -4,8 +4,10 @@
       <ion-back-button *ngIf="!currentPageHome" defaultHref="/"></ion-back-button>
     </ion-buttons> 
     
-      <ion-title class="title fw-bold fs-2 ion-padding" routerLink="/" role="button">
-        SaveMyPennies
+      <ion-title class="title fw-bold fs-2 ion-padding">
+        <ion-text role="button" routerLink="/">
+          SaveMyPennies
+        </ion-text>
       </ion-title>
       <ion-button (click)="presentModal()" size="small" slot="end" class="ion-hide-lg-down"> 
         Create a Budget
