@@ -2,30 +2,6 @@
   "budgetItems": [
     {
       "type": "income",
-      "description": "Ikhokha",
-      "amount": 17441,
-      "id": 92.46707
-    },
-    {
-      "type": "expense",
-      "description": "Rent",
-      "amount": 4500,
-      "id": 99.46707
-    },
-    {
-      "type": "expense",
-      "description": "Groza",
-      "amount": 600,
-      "id": 104.46707
-    },
-    {
-      "type": "income",
-      "description": "Savings",
-      "amount": 8800,
-      "id": 113.46707
-    },
-    {
-      "type": "income",
       "description": "DA",
       "amount": 5662,
       "id": 114.46707
@@ -33,14 +9,26 @@
     {
       "type": "expense",
       "description": "Transport",
-      "amount": 2500,
+      "amount": 2020,
       "id": 115.46707
     },
     {
-      "type": "expense",
-      "description": "Debt Payment",
-      "amount": 10000,
+      "type": "income",
+      "description": "Savings",
+      "amount": 4000,
       "id": 116.46707
+    },
+    {
+      "type": "income",
+      "description": "2nd Salary",
+      "amount": 5662,
+      "id": 117.46707
+    },
+    {
+      "type": "expense",
+      "description": "Rent",
+      "amount": 6000,
+      "id": 118.46707
     }
   ]
 }
